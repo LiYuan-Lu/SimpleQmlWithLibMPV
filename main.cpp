@@ -7,7 +7,7 @@
 
 int main(int argc, char* argv[])
 {
-    // QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
+    // Force Qt to use opengl
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
 
     QGuiApplication app(argc, argv);

@@ -138,18 +138,18 @@ public:
     void render()
     {
         QQuickOpenGLUtils::resetOpenGLState();
-        QOpenGLFramebufferObject* fbo = framebufferObject();
-        mpv_opengl_fbo mpfbo { static_cast<int>(fbo->handle()), fbo->width(), fbo->height(), 0 };
-        int flip_y { 0 };
+        QOpenGLFramebufferObject* openGLFrameBufferObject = framebufferObject();
+        mpv_opengl_fbo mpvOpenGLFrameBufferObject { static_cast<int>(openGLFrameBufferObject->handle()), openGLFrameBufferObject->width(), openGLFrameBufferObject->height(), 0 };
+        int flipY { 0 };
 
         mpv_render_param params[] = {
             // Specify the default framebuffer (0) as target. This will
             // render onto the entire screen. If you want to show the video
             // in a smaller rectangle or apply fancy transformations, you'll
             // need to render into a separate FBO and draw it manually.
-            { MPV_RENDER_PARAM_OPENGL_FBO, &mpfbo },
+            { MPV_RENDER_PARAM_OPENGL_FBO, &mpvOpenGLFrameBufferObject },
             // Flip rendering (needed due to flipped GL coordinate system).
-            { MPV_RENDER_PARAM_FLIP_Y, &flip_y },
+            { MPV_RENDER_PARAM_FLIP_Y, &flipY },
             { MPV_RENDER_PARAM_INVALID, nullptr }
         };
         // See render_gl.h on what OpenGL environment mpv expects, and
